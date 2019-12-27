@@ -17,3 +17,13 @@ my_info = (sys.argv[1])
 a=Info.split(':')
 my_ip_addr=str(a[0])
 my_port=int(a[1])
+
+my_server.bind((IP_addr,port))
+
+my_server.listen(100)
+print('Server connected')
+print('Waiting for connections')
+
+
+clients=[]
+clients.append(server)
