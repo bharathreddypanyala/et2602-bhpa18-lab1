@@ -1,1 +1,12 @@
+#!/usr/bin/python3
+
+import socket
+import sys
+from _thread import *
+import select 
+import re 
+
+if len(sys.argv)!=3:
+    print("Correct input format./chatclient ip:port nickname")
+    sys.exit()
 
