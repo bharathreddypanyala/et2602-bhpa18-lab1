@@ -10,3 +10,12 @@ if len(sys.argv)!=3:
     print("Correct input format./chatclient ip:port nickname")
     sys.exit()
 
+my_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+my_server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+
+my_info = (sys.argv[1])
+a=my_info.split(':')
+my_ip_addr=str(a[0])
+my_port=int(a[1])
+nick=str(sys.argv[2])
