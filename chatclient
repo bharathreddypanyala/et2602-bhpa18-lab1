@@ -21,7 +21,7 @@ my_port=int(a[1])
 nick=str(sys.argv[2])
 
 
-my_server.connect((IP_addr, port))
+my_server.connect((my_ip_addr, my_port))
 
 initial_msg=my_server.recv(2048).decode('utf-8')
 
@@ -32,7 +32,7 @@ nick = 'NICK ' + nick
 
 my_server.sendall(nick.encode('utf-8'))
 
-my_response=server.recv(2048).decode('utf-8')
+my_response=my_server.recv(2048).decode('utf-8')
 print(my_response)
 if my_response == "OK":
     pass
@@ -42,6 +42,28 @@ elif my_response == "ERR malformed nick name":
     sys.exit()
     
     
+
+
+
+while True:
+    socket_list=[sys.stdin, my_server]#list of input streams
+    
+
+    read_sockets,write_sockets,error_sockets=select.select(socket_list,[],[])
+    
+    for sockets in read_sockets:
+        if sockets == my_server:
+            message = sockets.recv(2048).decode('utf-8')
+            print(message)
+        else:
+            message=sys.stdin.readline()
+            message = 'MSG '+ message
+            if message == '\n':
+                continue
+            else:
+                my_server.sendall(message.encode('utf-8'))
+                
+my_server.close()
 
 
 
