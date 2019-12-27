@@ -19,3 +19,29 @@ a=my_info.split(':')
 my_ip_addr=str(a[0])
 my_port=int(a[1])
 nick=str(sys.argv[2])
+
+
+my_server.connect((IP_addr, port))
+
+initial_msg=my_server.recv(2048).decode('utf-8')
+
+print(initial_msg)
+
+nick = 'NICK ' + nick
+
+
+my_server.sendall(nick.encode('utf-8'))
+
+my_response=server.recv(2048).decode('utf-8')
+print(my_response)
+if my_response == "OK":
+    pass
+elif my_response == "ERR malformed nick name":
+    print('do not enter nick name with special characters,limit to 12 chars')
+    print('disconnecting try again with valid nickname')
+    sys.exit()
+    
+    
+
+
+
